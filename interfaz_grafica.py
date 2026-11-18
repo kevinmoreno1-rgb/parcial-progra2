@@ -54,6 +54,7 @@ class InterfazGrafica:
         self.__lbl_estado.pack(anchor="w")
         self.__lbl_meta = tk.Label(frame_estado, text="")
         self.__lbl_meta.pack(anchor="w")
+        #NUEVO NO VISTO EN CLASE : BARRA DE PROGRESO    NUEVO NO VISTO EN CLASE : BARRA DE PROGRESO     NUEVO NO VISTO EN CLASE : BARRA DE PROGRESO
         self.__barra_progreso = ttk.Progressbar(frame_estado, length=400, mode="determinate")
         self.__barra_progreso.pack(anchor="w", pady=3)
 
