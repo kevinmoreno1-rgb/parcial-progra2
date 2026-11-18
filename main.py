@@ -11,9 +11,9 @@ from interfaz_grafica import InterfazGrafica
 usuarios_familia = {
     "Mamá": Padre("U01", "Mamá", "1234"),
     "Papá": Padre("U02", "Papá", "1234"),
-    "Carlos": Hijo("U03", "Carlos", "0000"),
-    "Sofía": Hijo("U04", "Sofía", "0000"),
-    "Andrés": Hijo("U05", "Andrés", "0000")
+    "Kevin": Hijo("U03", "Carlos", "0000"),
+    "Laura": Hijo("U04", "Sofía", "0000"),
+    "Jasson": Hijo("U05", "Andrés", "0000")
 }
 
 cuenta_bancaria = CuentaFamiliar("245-89100-12", 0.0, list(usuarios_familia.values()))
