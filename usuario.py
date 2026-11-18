@@ -15,4 +15,4 @@ class Usuario:
         return self.__nombre.strip().lower() == nombre_buscado.strip().lower()
 
     def mostrar_identificacion(self):
-        return f"Usuario: {self.__nombre} (Rol: {self.__rol})"
+        return f"{self.__nombre} (Rol: {self.__rol})"

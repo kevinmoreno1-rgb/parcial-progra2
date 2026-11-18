@@ -1,31 +1,29 @@
-from cuenta import CuentaFamiliar
-from hijo import Hijo
 from padre import Padre
+from hijo import Hijo
+from cuenta_familiar import CuentaFamiliar
+from gestor_excel import GestorExcel
+from notificacion import Notificacion
+from meta_ahorro import MetaAhorro
+from reporte_familiar import ReporteFamiliar
+from interfaz_grafica import InterfazGrafica
 
+# 1. Creación de los objetos principales (Ahora usando las clases Padre e Hijo)
+usuarios_familia = {
+    "Mamá": Padre("U01", "Mamá", "1234"),
+    "Papá": Padre("U02", "Papá", "1234"),
+    "Carlos": Hijo("U03", "Carlos", "0000"),
+    "Sofía": Hijo("U04", "Sofía", "0000"),
+    "Andrés": Hijo("U05", "Andrés", "0000")
+}
 
-def main():
-    # 1. Creación de objetos y colecciones principales
-    cuenta = CuentaFamiliar()
-    papa = Padre(1, "Alberto / Martha (Papás)")
-    hijos = {"1": Hijo(101, "Kevin"), "2": Hijo(102, "Laura")}
+cuenta_bancaria = CuentaFamiliar("245-89100-12", 0.0, list(usuarios_familia.values()))
 
-    print("\t SISTEMA FAMICUENTA INICIADO ")
+# 2. Creación de objetos auxiliares
+backend_excel = GestorExcel("famicuenta.xlsx")
+sistema_notificacion = Notificacion("FamiCuenta")
+meta = MetaAhorro("Fondo de Emergencia", 1000000.0)
+reporte = ReporteFamiliar("Historial de la Familia")
 
-    # 2. Ejecución general y llamadas a los métodos
-    while True:
-        try:
-            # Delega TODA la lógica visual a la cuenta
-            continuar_sistema = cuenta.ejecutar_menu(papa, hijos)
-
-            # Si ejecutar_menu devuelve False (opción 4), se rompe el ciclo
-            if not continuar_sistema:
-                break
-
-        # 3. Manejo de excepciones centralizado
-        except ValueError as e:
-            print(f"\n[ALERTA DE SEGURIDAD]: {e}")
-        except Exception as e:
-            print(f"\n[ERROR INESPERADO]: Entrada no válida. ({e})")
-
-if __name__ == "__main__":
-    main()
+# 3. Iniciar ejecución general de la aplicación
+app = InterfazGrafica(cuenta_bancaria, usuarios_familia, backend_excel, sistema_notificacion, meta, reporte)
+app.iniciar()
