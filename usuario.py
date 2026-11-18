@@ -1,17 +1,18 @@
 class Usuario:
-    def __init__(self, id_usuario, nombre):
+    def __init__(self, id_usuario, nombre, rol, pin_seguridad):
         self.__id_usuario = id_usuario
         self.__nombre = nombre
+        self.__rol = rol
+        self.__pin_seguridad = pin_seguridad
 
-    def obtener_nombre(self):
-        return self.__nombre
+    def validar_pin(self, pin_ingresado):
+        return self.__pin_seguridad == pin_ingresado
 
-    def obtener_id(self):
-        return self.__id_usuario
+    def es_padre(self):
+        return self.__rol.strip().upper() == "PADRE"
 
-    def realizar_operacion(self, cuenta, monto, concepto=""):
-        pass
+    def coincide_nombre(self, nombre_buscado):
+        return self.__nombre.strip().lower() == nombre_buscado.strip().lower()
 
-    # Nuevo metodo base para pedir datos interactivos (Polimorfismo)
-    def operar_interactivo(self, cuenta):
-        pass
+    def mostrar_identificacion(self):
+        return f"Usuario: {self.__nombre} (Rol: {self.__rol})"

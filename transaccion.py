@@ -1,22 +1,21 @@
-from datetime import datetime
-
-
 class Transaccion:
-    def __init__(self, autor, tipo, monto):
-        self.__autor = autor
-        self.__tipo = tipo
+    def __init__(self, id_transaccion, monto, fecha, concepto):
+        self.__id_transaccion = id_transaccion
         self.__monto = monto
-        self.__fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.__concepto = ""  # Se inicializa vacío para pedirlo luego
+        self.__fecha = fecha
+        self.__concepto = concepto
 
-    # NUEVO: La transacción es responsable de pedir sus propios detalles
-    def solicitar_concepto(self):
-        print(f"   -> Detallando la transacción de {self.__tipo}...")
-        self.__concepto = input("   Escribe el concepto o motivo: ")
+    def es_monto_valido(self):
+        return self.__monto > 0
 
-        # Validación: si el usuario lo deja vacío, pone un texto por defecto
-        if not self.__concepto.strip():
-            self.__concepto = "Sin especificar"
+    def modificar_concepto(self, nuevo_concepto):
+        if len(nuevo_concepto.strip()) > 0:
+            self.__concepto = nuevo_concepto.strip()
 
-    def mostrar_detalle(self):
-        return f"[{self.__fecha}] {self.__tipo}: ${self.__monto} | Por: {self.__autor} | Motivo: {self.__concepto}"
+    def aplicar_a_saldo(self, saldo_actual, es_ingreso=True):
+        if es_ingreso:
+            return saldo_actual + self.__monto
+        return saldo_actual - self.__monto
+
+    def obtener_resumen(self):
+        return f"ID: {self.__id_transaccion} | Fecha: {self.__fecha} | Monto: ${self.__monto:,.2f} | Concepto: {self.__concepto}"
